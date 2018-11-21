@@ -35,20 +35,18 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_FILES
 );
 
-$routerContainer = new RouterContainer(); // contenedor de ruta
-$map = $routerContainer->getPath();
-$map->get('index','/','../index.php'); // 1:el nombre de la ruta 2: url de la ruta 3: lo que vamos a devolver
-$map->get('addJobs','/jobs/add','../addJob.php'); // 1:el nombre de la ruta 3: lo que vamos a devolver
 
+$routerContainer = new RouterContainer();
+$map = $routerContainer->getMap();
+$map->get('index', '/proyectos/', '../index.php');
+$map->get('addJobs', '/proyectos/jobs/add', '../addJob.php');
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
-
-if(!route) {
-    echo "No existe la ruta";
-}else {
-    var_dump($route);
+if (!$route) {
+    echo 'No route';
+} else {
+    require $route->handler;
 }
-
 
 
 
