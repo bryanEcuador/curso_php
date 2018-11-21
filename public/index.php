@@ -1,9 +1,9 @@
 <?php
-
+ // para que se desplieguen los errores
 ini_set('display_errors',1);
 ini_set('display_starup_error',1);
 error_reporting(E_ALL);
-
+    // para requerir cualquiera de los archivos
 require_once('../vendor/autoload.php');
 
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -38,14 +38,37 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
-$map->get('index', '/proyectos/', '../index.php');
-$map->get('addJobs', '/proyectos/jobs/add', '../addJob.php');
+    // creando las rutas de la aplicación
+$map->get('index', '/proyectos/', [
+    'controller' => 'app\Controller\IndexController',
+    'action' => 'indexAction'
+]);
+
+$map->get('addJobs', '/proyectos/jobs/add', [
+    'controller' => 'app\Controller\JobsController',
+    'action' => 'addJob'
+]);
+
+$map->post('saveJobs', '/proyectos/jobs/add', [
+    'controller' => 'app\Controller\JobsController',
+    'action' => 'addJob'
+]);
+
+
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
+
 if (!$route) {
+    
     echo 'No route';
 } else {
-    require $route->handler;
+    $handlerData = $route->handler;
+    $actionName = $handlerData['action'];
+    $controllerName = $handlerData['controller'];
+
+    $controller = new $controllerName;
+    $controller->$actionName($request);
+    //require $route->handler;
 }
 
 

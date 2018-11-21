@@ -1,15 +1,3 @@
-<?php
-
-
-use app\model\Jobs;
-
-$job = Jobs::all();
-
-foreach ($job as $jobs) {
-  echo  $jobs->title;
-}
-
-?>
 <!doctype html>
 <html lang="en">
 

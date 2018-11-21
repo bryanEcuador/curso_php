@@ -1,20 +1,3 @@
-<?php
-
-var_dump($_GET);
-var_dump($_POST);
-
-use app\model\Jobs;
-
-if(!empty($_POST)    ){
-    $job = new Jobs();
-    $job->title = $_POST['title'];
-    $job->description = $_POST['description'];
-    $job->months = 1;
-    $job->state = 1;
-    $job->save();
-}
-
-?>
 <html>
     <head>
         <title>Add Job</title>
@@ -24,7 +7,7 @@ if(!empty($_POST)    ){
     </head>
     <body>
         <h1>Add Job</h1>
-        <form action="addJob.php" method="post" >
+        <form action="/proyectos/jobs/add" method="post" >
             <label for="">Title:</label>
             <input type="text" name="title" ><br>
             <label for="">Description:</label>
