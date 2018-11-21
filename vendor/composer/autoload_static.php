@@ -17,6 +17,7 @@ class ComposerStaticInit57934b4d7baee6d4ca010e51783568cc
         '0b0974a5566a1077e4f2e111341112c1' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_server.php',
         '1ca3bc274755662169f9629d5412a1da' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/normalize_uploaded_files.php',
         '40360c0b9b437e69bcbb7f1349ce029e' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/parse_cookie_header.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -28,9 +29,14 @@ class ComposerStaticInit57934b4d7baee6d4ca010e51783568cc
         array (
             'Zend\\Diactoros\\' => 15,
         ),
+        'T' => 
+        array (
+            'Twig\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Translation\\' => 30,
         ),
         'P' => 
@@ -66,9 +72,17 @@ class ComposerStaticInit57934b4d7baee6d4ca010e51783568cc
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-diactoros/src',
         ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'Symfony\\Component\\Translation\\' => 
         array (
@@ -121,12 +135,23 @@ class ComposerStaticInit57934b4d7baee6d4ca010e51783568cc
         0 => __DIR__ . '/..' . '/nesbot/carbon/src',
     );
 
+    public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit57934b4d7baee6d4ca010e51783568cc::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit57934b4d7baee6d4ca010e51783568cc::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInit57934b4d7baee6d4ca010e51783568cc::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit57934b4d7baee6d4ca010e51783568cc::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
