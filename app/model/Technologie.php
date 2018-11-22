@@ -4,8 +4,8 @@ namespace app\model;
 use app\model\BaseElement;
 use Illuminate\Database\Eloquent\Model;
 
-class Proyect extends Model
+class Technologie extends Model
 {
-    protected $table = 'tb_proyects';
+    protected $table = 'tb_technologies';
     public $timestamps = false;
 }

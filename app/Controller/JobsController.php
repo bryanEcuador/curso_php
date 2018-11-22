@@ -2,8 +2,9 @@
 namespace App\Controller;
 
 use app\model\Jobs;
+use app\Controller\BaseController;
 
-class JobsController 
+class JobsController extends BaseController  
 {
     public function addJob($request)
     {
@@ -18,6 +19,7 @@ class JobsController
             $job->save();
         }
 
-        include '../View/addJob.php';
+        echo $this->renderHtml('addJob.twig');
+       // include '../View/addJob.php';
     }
 }
