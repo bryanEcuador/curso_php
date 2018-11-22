@@ -20,6 +20,6 @@ class JobsController extends BaseController
         }
 
         echo $this->renderHtml('addJob.twig');
-       // include '../View/addJob.php';
+       
     }
 }

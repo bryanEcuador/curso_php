@@ -1,0 +1,121 @@
+{% extends "layout.twig" %}
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <div id="resume-header" class="row">
+      <div class="col-3">
+        <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
+      </div>
+      <div class="col">
+      
+        {% for info in informacion %}
+              <h1> {{ info.name }} {{ info.last_name }} </h1>
+              <h2>{{ info.profession }}</h2>
+              <ul>
+                <li>Mail: {{ info.email }}</li>
+                <li>Phone: {{ info.phone }}</li>
+                <li>LinkedIn: {{ info.linkedin }}</li>
+                <li>Twitter: {{ info.twitter }}</li>
+              </ul>
+        {% endfor %}
+        
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h2 class="border-bottom-gray" >Carrer Summary</h2>
+                {% for info in informacion %}
+                  <p> {{ info.sumary }} </p>              
+                {% endfor %}
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div>
+          <h3 class="border-bottom-gray" >Work Experience</h3>
+          <ul>
+                {% for datos in job %}
+                 <li class="work-position">
+                  <h5> {{datos.title}} </h5>  
+                  <p> {{datos.description}}</p>
+                  <strong>Achievements:</strong>
+                  <ul>
+                      {% for dato in activity %}
+                        {% if dato.jobs_id == datos.id %}
+                          <li> {{ dato.description}} </li>
+                        {% endif %}  
+                      {% endfor %}
+                  </ul>
+                </li>              
+                {% endfor %}
+          </ul>
+        </div>
+        <div>
+            <h3 class="border-bottom-gray">Projects</h3>
+              {% for datos in proyects %}
+                <div class="project">
+                 <h5>{{ datos.name}}</h5>
+                  <div class="row">
+                    <div class="col-3">
+                        <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
+                      </div>
+                      <div class="col">
+                        <p> {{datos.description}} </p>
+                        <strong>Technologies used:</strong>
+                          {% for dato in tecnologies %}
+                            {% if dato.proyecto_id == datos.id %}
+                            <span class="badge badge-secondary">PHP</span>    
+                            {% endif %}
+                          {% endfor %}
+                          </div>
+                </div>
+            </div>
+
+              {% endfor %}
+            
+            
+          </div>
+
+      </div>
+      <div class="col-3">
+        <h3 class="border-bottom-gray" >Skills & Tools</h3>
+        <h4>Backend</h4>
+        <ul>
+          <li>PHP</li>
+        </ul>
+        <h4>Frontend</h4>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+        </ul>
+        <h4>Frameworks</h4>
+        <ul>
+          <li>Laravel</li>
+          <li>Bootstrap</li>
+        </ul>
+        <h3 class="border-bottom-gray" >Languages</h3>
+        <ul>
+          <li>Spanish</li>
+          <li>English</li>
+        </ul>
+      </div>
+    </div>
+    <div id="resume-footer" class="row">
+      <div class="col">
+          Designed by @hectorbenitez
+      </div>
+    </div>
+  </div>
+       
+{% endblock %}
+
+
+
+
+
+
