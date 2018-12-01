@@ -9,6 +9,7 @@ require_once('../vendor/autoload.php');
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Aura\Router\RouterContainer;
 use Respect\Validation\Validator as v; // mettodo validador
+use Illuminate\Support\Facades\Redirect;
 
 $capsule = new Capsule;
 
@@ -35,6 +36,8 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_COOKIE,
     $_FILES
 );
+
+session_start();
 
 
 $routerContainer = new RouterContainer();
@@ -76,6 +79,17 @@ $map->post('auth', '/proyectos/auth', [
     'action' => 'postLogin'
 ]);
 
+$map->get('admin', '/proyectos/admin', [
+    'controller' => 'app\Controller\AdminController',
+    'action' => 'getIndex',
+    'auth' => true
+]);
+
+$map->get('logout', '/proyectos/logout', [
+    'controller' => 'app\Controller\AuthController',
+    'action' => 'getLogout',
+]);
+
 
 
 
@@ -89,9 +103,26 @@ if (!$route) {
     $handlerData = $route->handler;
     $actionName = $handlerData['action'];
     $controllerName = $handlerData['controller'];
+    $needAuth = $handlerData['auth'] ?? false;
+
+    $sessionTrue = $_SESSION['userId'] ?? null;
+
+    if($needAuth && !$sessionTrue){
+        $actionName = 'getLogout';
+        $controllerName = 'app\Controller\AuthController';
+
+        echo "ruta prohibida";
+    }
+
 
     $controller = new $controllerName;
    $response = $controller->$actionName($request);
+
+   foreach ($response->getHeaders() as $name => $values) {
+        foreach ($values as $value) {
+            header(sprintf('%s:%s', $name, $value), false);
+        }
+    }
     echo $response->getBody();
 }
 
