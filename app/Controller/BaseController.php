@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Controller;
-
+use Zend\Diactoros\Response\HtmlResponse;
+use Respect\Validation\Validator as v;
 class BaseController 
 {
     protected $templateEngine;
     
-    public function __construct(Type $var = null)
+    public function __construct()
     {
         $loader = new \Twig_Loader_Filesystem('../View');
 
@@ -18,7 +19,7 @@ class BaseController
 
     public function renderHtml($fileName , $data = [])
     {
-        return $this->templateEngine->render($fileName , $data);
+        return new HtmlResponse($this->templateEngine->render($fileName, $data)); 
     }
 
 }

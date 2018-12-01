@@ -1,0 +1,19 @@
+{% extends "layout.twig" %}
+{% block head %}
+    <title> Login</title>
+{% endblock %}
+
+{% block content %}
+
+<div>
+ {{responseMessage}}
+</div>
+<h1>Login</h1>
+        <form action="/proyectos/auth" method="post"  >
+            <label for="">User:</label>
+            <input type="text" name="user" ><br>
+            <label for="">Password:</label>
+            <input type="password" name="pass"><br>
+            <button type="submit">Save</button>
+        </form>
+{% endblock %}

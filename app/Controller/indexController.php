@@ -30,7 +30,7 @@ class IndexController extends BaseController {
        // }
        //var_dump($infomation);
         //echo $infomation->name;        
-        echo $this->renderHtml('index.twig',
+        return $this->renderHtml('index.twig',
             [
                'informacion' => $infomation,
                 'job' => $job,

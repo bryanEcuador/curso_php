@@ -8,6 +8,7 @@ require_once('../vendor/autoload.php');
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Aura\Router\RouterContainer;
+use Respect\Validation\Validator as v; // mettodo validador
 
 $capsule = new Capsule;
 
@@ -55,6 +56,29 @@ $map->post('saveJobs', '/proyectos/jobs/add', [
 ]);
 
 
+$map->get('addUser', '/proyectos/user/add', [
+    'controller' => 'app\Controller\UserController',
+    'action' => 'addUser'
+]);
+
+$map->post('saveUser', '/proyectos/user/add', [
+    'controller' => 'app\Controller\UserController',
+    'action' => 'addUser'
+]);
+
+$map->get('loginForm', '/proyectos/login', [
+    'controller' => 'app\Controller\AuthController',
+    'action' => 'getLogin'
+]);
+
+$map->post('auth', '/proyectos/auth', [
+    'controller' => 'app\Controller\AuthController',
+    'action' => 'postLogin'
+]);
+
+
+
+
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
 
@@ -67,8 +91,8 @@ if (!$route) {
     $controllerName = $handlerData['controller'];
 
     $controller = new $controllerName;
-    $controller->$actionName($request);
-    //require $route->handler;
+   $response = $controller->$actionName($request);
+    echo $response->getBody();
 }
 
 
